@@ -1,0 +1,67 @@
+<aura:component controller="ProductionCmpCtrl" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+    <aura:attribute name="createMaterialRequest" type="Aura.Action"/>
+    <aura:attribute name="departmentId" type="String"  />
+    <aura:attribute name="lstMaterialRequestWrap" type="List"  />
+    <aura:attribute name="isNewActionRequired" type="Boolean" default="false"/>
+    <aura:attribute name="isApproveActionRequired" type="Boolean" default="false"  />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<!--  PAGE HEADER -->
+	<c:HeaderViewByAction createMaterialRequest="{!v.createMaterialRequest}" 
+                          isNewActionRequired="{!v.isNewActionRequired}"/>
+	
+	<div class="slds-grid slds-grid_vertical slds-box  ">
+		<div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>jajgsdajfgjasva</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>javsdfsfa</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+			</div>
+		</div>
+		<div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>java</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>java</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+			</div>
+		</div>
+		<div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>jatttttttttttttttva</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>java</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>sale</span>
+				</div>
+			</div>
+		</div>
+	</div>
+    <c:MaterialRequestWrapperTable lstMaterialRequestWrap="{!v.lstMaterialRequestWrap}" 
+                                   isApproveActionRequired="{!v.isApproveActionRequired}" />
+    
+</aura:component>

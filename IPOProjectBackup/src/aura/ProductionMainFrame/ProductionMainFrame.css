@@ -1,0 +1,11 @@
+.THIS {
+}
+
+
+.THIS slds-tabs--default__nav li.slds-active{
+     
+}
+
+.THIS .slds-tabs--default__item.slds-active{
+     background: blue !important;
+}

@@ -1,0 +1,85 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+    <aura:attribute name="objSelectedMaterialRequestWrap" type="MaterialRequestWrapper"  />
+    	<div class="slds-col">
+			<table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+				<thead>
+					<tr class="slds-line-height_reset slds-theme_shade">
+						<th class="slds-text-align_right" scope="col" style="width: 3.25rem;">
+							<div class="slds-th__action slds-th__action_form">
+								<div class="slds-checkbox">
+									<lightning:input label="" type="checkbox" value="" class=""/>
+								</div>
+							</div>
+						</th>
+						<th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Name">Material Name</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+						<th aria-label="Close Date" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Close Date">Type</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+						<th aria-label="Account Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Account Name">Order Quantity</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+						<th aria-label="Close Date" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Close Date">Approved Quantity</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+						<th aria-label="Account Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Account Name">Stock Quantity</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<aura:iteration items="{!v.objSelectedMaterialRequestWrap.lstOfMaterial}" var="eachDataWrap">
+                        <tr aria-selected="false" class="slds-hint-parent">
+                            <td class="slds-text-align_right" role="gridcell">
+                                <div class="slds-checkbox">
+                                    <lightning:input type="checkbox" checked="{!eachDataWrap.isSelected}" class="slds-truncate"/>
+                                </div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Acme">
+                                    {!eachDataWrap.materialName}
+                                </div>
+                            </td>
+							<td role="">
+                                <div class="slds-truncate" title="Acme">
+                                    {!eachDataWrap.materialType}
+                                </div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Acme">
+                                    <lightning:input type="number" value="{!eachDataWrap.orderQuantity}" name="days" class="slds-truncate" /> 
+                                </div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Acme">
+                                    <lightning:input type="number" value="{!eachDataWrap.approvedQuantity}" name="days" class="slds-truncate" /> 
+                                </div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Acme">
+                                    <lightning:input type="number" value="{!eachDataWrap.stockQuantity}" name="days" class="slds-truncate" /> 
+                                </div>
+                            </td>
+                        </tr>
+					</aura:iteration>
+				</tbody>
+			</table>
+		</div>
+</aura:component>

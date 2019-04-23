@@ -1,0 +1,83 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                controller="ProductionCmpCtrl" 
+                access="global" >
+	<aura:attribute name="objSelectedMaterialRequestWrap" type="MaterialRequestWrapper" />
+    <aura:attribute name="lstMaterialRequestWrap" type="List"  />
+    <aura:attribute name="rowSelected" type="Boolean" default="false"  />
+    <aura:attribute name="isApproveActionRequired" type="Boolean" default="false"  />
+    <div class="slds-grid slds-grid_vertical">
+		<div class="slds-col">
+			<table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+				<thead>
+					<tr class="slds-line-height_reset slds-theme_shade">
+						<th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-th__action slds-th__action_form">
+								<div class="slds-checkbox">
+									Material Request No.
+								</div>
+							</div>
+						</th>
+						<th aria-label="Account Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Account Name">Status</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+						<th aria-label="Close Date" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+							<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+								<span class="slds-truncate" title="Close Date">Order Date</span>
+								<span class="slds-icon_container slds-icon-utility-arrowdown"></span>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<aura:iteration items="{!v.lstMaterialRequestWrap}" var="eachDataWrap">
+                        <tr aria-selected="false" class="slds-hint-parent" onclick="{!c.materialselected}" 
+                            id="{!eachDataWrap.objMaterialRequest.Id}">
+                            <td class="slds-text-align_left" role="gridcell" >
+                                <div class="slds-checkbox">
+                                    {!eachDataWrap.objMaterialRequest.Name}
+                                </div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Acme">
+                                    {!eachDataWrap.objMaterialRequest.Status__c}
+                                </div>
+                            </td>
+							<td role="">
+                                <div class="slds-truncate" title="Acme">
+                                    {!eachDataWrap.objMaterialRequest.OrderDate__c}
+                                </div>
+                            </td>
+                        </tr>
+                        
+					</aura:iteration>
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="slds-grid slds-grid_vertical">
+        <aura:if isTrue="{! and(v.isApproveActionRequired,v.rowSelected) }">
+            <div class="slds-col">
+                <br/>
+            </div>
+            <div class="slds-col slds-align_absolute-center">
+                <lightning:button variant="brand" label="Approve" title="Approve" onclick="{!c.approveMaterialRequest}" />
+                <lightning:button variant="destructive" label="Cancel" title="Cancel" onclick="{!c.approeMaterialCancel}"/>
+            </div>
+        </aura:if>
+        <div class="slds-col">
+            <br/>
+        </div>
+        <div class="slds-col">
+            <aura:if isTrue="{!v.rowSelected}">
+                <c:MaterialQuantityWrapperTable objSelectedMaterialRequestWrap="{!v.objSelectedMaterialRequestWrap}" />
+            </aura:if>
+        </div>
+        <div class="slds-col">
+            <br/>
+        </div>
+	</div>
+    
+</aura:component>

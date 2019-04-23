@@ -1,0 +1,176 @@
+<aura:component controller="PlanComponentCtrl"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+	<aura:attribute name="lstTypePicklistValues" type="List" />
+    <aura:attribute name="lstStatusPicklistValues" type="List" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--  PAGE HEADER -->
+	<c:HeaderView />
+    
+    
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col slds-align_absolute-center">
+        <!-- CREATE NEW EXPENSE -->
+    <div aria-labelledby="newexpenseform">
+        <!-- BOXED AREA -->
+        <fieldset class="slds-box slds-theme--default slds-container--large">
+        <legend id="newexpenseform" class="slds-text-heading--small 
+          slds-p-vertical--medium">
+          Add Plan
+        </legend>
+  
+        <!-- CREATE NEW EXPENSE FORM -->
+        <form class="slds-form--stacked">          
+            <lightning:input aura:id="expenseform" label="Expense Name"
+                             name="expensename"
+                             value="{!v.newExpense.Name}"
+                             required="true"/> 
+            <lightning:input type="number" aura:id="expenseform" label="Amount"
+                             name="expenseamount"
+                             min="0.1"
+                             formatter="currency"
+                             step="0.01"
+                             value="{!v.newExpense.Amount__c}"
+                             messageWhenRangeUnderflow="Enter an amount that's at least $0.10."/>
+            <lightning:input aura:id="expenseform" label="Client"
+                             name="expenseclient"
+                             value="{!v.newExpense.Client__c}"
+                             placeholder="ABC Co."/>
+            <lightning:input type="date" aura:id="expenseform" label="Expense Date"
+                             name="expensedate"
+                             value="{!v.newExpense.Date__c}"/>
+            <lightning:input type="checkbox" aura:id="expenseform" label="Reimbursed?"  
+                             name="expreimbursed"
+                             checked="{!v.newExpense.Reimbursed__c}"/>
+            <lightning:button label="Create Expense" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.clickCreate}"/>
+        </form>
+        <!-- / CREATE NEW EXPENSE FORM -->
+  
+      </fieldset>
+      <!-- / BOXED AREA -->
+    </div>
+    <!-- / CREATE NEW EXPENSE -->
+    	</div>
+    </div>
+    
+    <!--
+    <div class="slds-grid slds-grid_vertical slds-box  ">
+        
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col slds-align_absolute-center">
+                Product
+            </div>
+            <div class="slds-col slds-align_absolute-center">
+                ?
+            </div>
+            
+            <div class="slds-col slds-align_absolute-center">
+                
+                <lightning:select label="Type">
+                    <aura:iteration items="{!v.lstTypePicklistValues}" var="eachPicklist">
+                        <option value="{!eachPicklist.name}"> {!eachPicklist.label}</option>
+                    </aura:iteration>
+                </lightning:select>
+                
+            </div>
+        </div>	
+        
+        
+        
+        <div class="slds-col slds-p-around_x-small slds-text-align_centre">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-text-align_centre">
+					<span>Product</span>
+				</div>
+				<div class="slds-col slds-text-align_centre">
+                    <span> ?</span>
+				</div>
+                <div class="slds-col slds-text-align_centre">
+					<span>Quantity</span>
+				</div>
+				<div class="slds-col slds-text-align_centre">
+					<span>input</span>
+				</div>
+			</div>
+		</div>
+        -->
+        <!--
+		<div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>Product Description</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>PRD</span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>Due Date</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>input date</span>
+				</div>
+			</div>
+		</div>
+        <div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>Type</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>
+                    	<lightning:select label="">
+                            <aura:iteration items="{!v.lstTypePicklistValues}" var="eachPicklist">
+                                <option value="{!eachPicklist.name}"> {!eachPicklist.label}</option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span></span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span></span>
+				</div>
+			</div>
+		</div>
+        <div class="slds-col slds-p-around_x-small">
+			<div class="slds-grid slds-wrap bgcolorupdate ">
+				<div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span>Status</span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span>
+                    	<lightning:select label="">
+                            <aura:iteration items="{!v.lstStatusPicklistValues}" var="eachPicklist">
+                                <option value="{!eachPicklist.name}"> {!eachPicklist.label}</option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </span>
+				</div>
+                <div class="slds-col slds-size_1-of-6 slds-text-align_right slds-p-right_x-large">
+					<span></span>
+				</div>
+				<div class="slds-col slds-size_2-of-6">
+					<span></span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	-->
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col slds-align_absolute-center">
+            <br/>
+		</div>
+		<div class="slds-col slds-align_absolute-center">
+			<lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveForm}" />
+			<lightning:button variant="destructive" label="Cancel" title="Cancel" onclick="{!c.cancelForm}"/>
+		</div>
+	</div>
+    
+    
+</aura:component>

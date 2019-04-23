@@ -1,0 +1,65 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="createMaterialRequest" type="Aura.Action"/>
+    <aura:attribute name="departmentName" type="String" default="Material"/>
+    <aura:attribute name="sortedViewMsg" type="String" default="Recently Material"/>
+    <aura:attribute name="isNewActionRequired" type="Boolean" default="false"/>
+    <div class="slds-page-header">
+		<div class="slds-page-header__row">
+			<div class="slds-page-header__col-title">
+				<div class="slds-media">
+					<div class="slds-media__figure">
+						<span class="slds-icon_container slds-icon-standard-opportunity">
+							<lightning:icon iconName="standard:account"  />
+						</span>
+					</div>
+					<div class="slds-media__body">
+						<div class="slds-page-header__name">
+							<div class="slds-page-header__name-title">
+								<h1>
+									<span>{!v.departmentName}</span>
+									<span class="slds-page-header__title slds-truncate" title="Recently Viewed">
+                                        {!v.sortedViewMsg}
+                                    </span>
+								</h1>
+							</div>
+							<div class="slds-page-header__name-switcher">
+								<div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+									<button class="slds-button slds-button_icon slds-button_icon-small" aria-haspopup="true" title="Switch list view">
+										<lightning:icon iconName="utility:chevrondown" size="small"/>
+										<span class="slds-assistive-text">Switch list view</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-page-header__col-actions">
+				<div class="slds-page-header__controls">
+					<div class="slds-page-header__control">
+						<aura:if isTrue="{!v.isNewActionRequired}">
+                            <ul class="slds-button-group-list">
+                                <li>
+                                    <button onclick="{!v.createMaterialRequest}" class="slds-button slds-button_neutral">New</button>
+                                </li>
+                                <li>
+                                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                                        <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-haspopup="true" title="More Actions">
+                                            <lightning:icon iconName="utility:chevrondown" size="x-small"/>
+                                            <span class="slds-assistive-text">More Actions</span>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aura:if>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slds-page-header__row">
+			<div class="slds-page-header__col-meta">
+				<p class="slds-page-header__meta-text">10 items • Updated 13 minutes ago</p>
+			</div>
+		</div>
+	</div>
+</aura:component>

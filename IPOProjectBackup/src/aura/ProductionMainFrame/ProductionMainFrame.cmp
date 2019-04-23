@@ -1,0 +1,35 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+	<aura:attribute name="departmentId" type="String" default="a010o00001yHC5c" />
+    <aura:attribute name="isMaterialLstViewEnable" type="String" default="true" />
+    <aura:attribute name="isNewActionRequired" type="Boolean" default="true"/>
+    <aura:attribute name="isApproveActionRequired" type="Boolean" default="false"/>
+    <c:HeaderView departmentName="Production"/>
+    <lightning:tabset variant="scoped">
+        <lightning:tab label="Material Order">
+             <aura:if isTrue="{!v.isMaterialLstViewEnable}">
+                	<c:MaterialRequestListView departmentId="{!v.departmentId}" 
+                                       createMaterialRequest="{!c.redirectToMateReqCreator}" 
+                                       	isNewActionRequired="{!v.isNewActionRequired}" 
+                                        	isApproveActionRequired="{!v.isApproveActionRequired}"/>
+                 <aura:set attribute="else">
+                  	<c:MaterialRequestCreator departmentId="{!v.departmentId}" 
+                                              materialRequestLstView="{!c.redirectToMateReqLstView}"/>
+                 </aura:set>
+              </aura:if>
+        </lightning:tab>
+        <lightning:tab label="Power">
+            Content in Tab Two
+        </lightning:tab>
+        <lightning:tab label="Quality">
+            Content in Tab Three
+        </lightning:tab>
+        <lightning:tab label="Item Four">
+            Content in Tab Four
+        </lightning:tab>
+        <lightning:tab label="Item Five">
+            Content in Tab Five
+        </lightning:tab>
+        
+    </lightning:tabset>
+</aura:component>
